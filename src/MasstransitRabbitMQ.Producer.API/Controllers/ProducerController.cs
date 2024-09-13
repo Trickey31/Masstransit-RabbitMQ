@@ -26,7 +26,8 @@ namespace MasstransitRabbitMQ.Producer.API.Controllers
                 Type = "sms"
             };
 
-            await _publishEndpoint.Publish(smsEvent);
+            using var source = new CancellationTokenSource(TimeSpan.FromSeconds(30));
+            await _publishEndpoint.Publish(smsEvent, source.Token);
 
             return Accepted();
         }

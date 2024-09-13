@@ -1,4 +1,4 @@
-﻿namespace MasstransitRabbitMQ.Producer.API
+﻿namespace MasstransitRabbitMQ.Consumer.API
 {
     public class MasstransitConfiguration
     {

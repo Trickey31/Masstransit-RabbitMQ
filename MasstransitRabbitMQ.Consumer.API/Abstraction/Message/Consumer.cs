@@ -1,14 +1,21 @@
 ﻿using MassTransit;
 using MasstransitRabbitMQ.Contract;
-using MasstransitRabbitMQ.Contracte;
+using MediatR;
 
 namespace MasstransitRabbitMQ.Consumer.API
 {
     public abstract class Consumer<TMessage> : IConsumer<TMessage> where TMessage : class, INotificationEvent
     {
+        private readonly ISender _sender;
+
+        protected Consumer(ISender sender)
+        {
+            _sender = sender;
+        }
+
         public async Task Consume(ConsumeContext<TMessage> context)
         {
-            throw new NotImplementedException();
+            await _sender.Send(context.Message);
         }
     }
 }

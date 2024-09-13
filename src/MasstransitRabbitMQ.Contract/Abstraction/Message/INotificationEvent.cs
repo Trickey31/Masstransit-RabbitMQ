@@ -1,7 +1,8 @@
-﻿using MasstransitRabbitMQ.Contract;
+﻿using MassTransit;
 
-namespace MasstransitRabbitMQ.Contracte
+namespace MasstransitRabbitMQ.Contract
 {
+    [ExcludeFromTopology]
     public interface INotificationEvent : IMessage
     {
     }

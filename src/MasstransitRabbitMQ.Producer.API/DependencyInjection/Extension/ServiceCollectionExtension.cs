@@ -1,4 +1,5 @@
 ﻿using MassTransit;
+using MasstransitRabbitMQ.Producer.API.DependencyInjection.Extensions;
 
 namespace MasstransitRabbitMQ.Producer.API
 {
@@ -12,6 +13,8 @@ namespace MasstransitRabbitMQ.Producer.API
 
             services.AddMassTransit(mt =>
             {
+                mt.SetKebabCaseEndpointNameFormatter();
+
                 mt.UsingRabbitMq((context, bus) =>
                 {
                     bus.Host(config.Host, config.VHost, x =>
@@ -19,6 +22,8 @@ namespace MasstransitRabbitMQ.Producer.API
                         x.Username(config.UserName);
                         x.Password(config.Password);
                     });
+
+                    bus.MessageTopology.SetEntityNameFormatter(new KebabCaseEntityNameFormatter());
                 });
             });
 

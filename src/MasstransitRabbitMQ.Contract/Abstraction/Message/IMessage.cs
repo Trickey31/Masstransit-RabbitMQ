@@ -1,9 +1,9 @@
 ﻿using MassTransit;
+using MediatR;
 
 namespace MasstransitRabbitMQ.Contract
 {
-    [ExcludeFromTopology]
-    public interface IMessage
+    public interface IMessage : IRequest
     {
         public Guid Id { get; set; }
 
